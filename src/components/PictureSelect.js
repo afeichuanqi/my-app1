@@ -40,13 +40,13 @@ export default class PictureSelect extends React.Component {
             }}>
                 {pictures.map((item, index, arr) => {
                     const checked = value.indexOf(item.id) !== -1 ? true : false;
-                    return <PictureBox checked={checked} onChange={this.onChange} key={item.id} picData={item}/>
+                    return <PictureBox checked={checked} onChange={this._onChangeBox} key={item.id} picData={item}/>
                 })}
             </div>
         </>
     }
 
-    onChange = (id, checked) => {
+    _onChangeBox = (id, checked) => {
         checked ? this.checkSet.add(id) : this.checkSet.delete(id);
         this.props.onChange([...this.checkSet])
     }
@@ -60,7 +60,7 @@ class PictureBox extends React.Component {
         }
     }
 
-    onChange = () => {
+    _onChange = () => {
         const {picData, onChange,checked} = this.props;
         onChange(picData.id, !checked)
     }
@@ -88,7 +88,7 @@ class PictureBox extends React.Component {
             <img style={{width: "100%"}}
                  src={picData.url}
             />
-            <input onChange={this.onChange}
+            <input onChange={this._onChange}
                    checked={checked}
                    style={{position: 'absolute', top: 0, left: 0,}}
                    type="checkbox"
